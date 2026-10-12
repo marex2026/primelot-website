@@ -507,7 +507,7 @@ footer{background:#07101A;padding:3rem 5% 2rem;border-top:1px solid rgba(200,149
     <h2 style="text-align:center;margin-bottom:.6rem;">Ready to Maximize Asset Recovery?</h2>
     <p style="text-align:center;margin-bottom:2rem;">Complete the form below. All inquiries are confidential.</p>
 
-    <form id="primelot-form" action="mailto:info@primelotassets.com" method="post" enctype="text/plain"
+    <form id="primelot-form" action="#cta"
           style="display:grid;gap:1rem;">
 
       <!-- Inquiry type + Role in line -->
@@ -601,6 +601,7 @@ footer{background:#07101A;padding:3rem 5% 2rem;border-top:1px solid rgba(200,149
       <p style="text-align:center;font-size:.73rem;color:var(--mid);margin-top:-.2rem;">
         All inquiries are confidential
       </p>
+      <p id="form-status" role="status" aria-live="polite" style="display:none;text-align:center;font-size:.85rem;line-height:1.6;color:#E8B84B;padding:.9rem 1rem;border:1px solid rgba(200,149,42,.5);border-radius:4px;background:rgba(200,149,42,.12);"></p>
     </form>
 
     <div class="cta-fn" style="margin-top:1.5rem;">Dallas, TX<span>·</span>Nationwide Service<span>·</span>Confidential<span>·</span>Chapter 7 &amp; 11 Compliant</div>
@@ -627,3 +628,20 @@ footer{background:#07101A;padding:3rem 5% 2rem;border-top:1px solid rgba(200,149
     <span>© 2026 PrimeLot Asset Liquidation, LLC. All Rights Reserved. Dallas, TX.</span>
     <span><a href="mailto:info@primelotassets.com" style="color:#C8952A;text-decoration:none;">info@primelotassets.com</a> · 3321 Garden Brook Dr, Dallas TX 75234</span>
     <span>Confidential Consultations Available · Professional References Upon Request</span>
+<script>
+(function(){
+  var f=document.getElementById('primelot-form'); if(!f) return;
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(f.reportValidity && !f.reportValidity()) return;
+    var v=function(n){var el=f.elements[n];return el&&el.value?el.value.trim():'';};
+    var type=v('inquiry_type')||'Website Inquiry';
+    var lines=['Inquiry type: '+type,'Role: '+v('role'),'Name: '+v('full_name'),'Email: '+v('email'),'Phone: '+v('phone'),'Company / Firm: '+v('company'),'','Situation:',v('message')];
+    var href='mailto:info@primelotassets.com?subject='+encodeURIComponent(type+' - '+v('full_name'))+'&body='+encodeURIComponent(lines.join('\n'));
+    window.location.href=href;
+    var st=document.getElementById('form-status');
+    st.innerHTML='Your email app should open with your inquiry filled in &mdash; just press Send.<br/>If it did not open, email <a href="mailto:info@primelotassets.com" style="color:#E8B84B">info@primelotassets.com</a> or call <a href="tel:+14694365759" style="color:#E8B84B">(469) 436-5759</a>.';
+    st.style.display='block';
+  });
+})();
+</script>
