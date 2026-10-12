@@ -1,0 +1,12 @@
+# Old WordPress pages -> matching section of the new site
+/about        /#why       301
+/about/       /#why       301
+/services     /#services  301
+/services/    /#services  301
+/contact      /#cta       301
+/contact/     /#cta       301
+/contact-us   /#cta       301
+/contact-us/  /#cta       301
+/home         /           301
+/home/        /           301
+/index.php    /           301
